@@ -64,17 +64,11 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void makeMovieSearchQuery(boolean popular) {
-        if (isOnline()){
-            URL movieSearchUrl = NetworkUtils.buildUrl(popular);
-            new MovieQueryTask().execute(movieSearchUrl);
-        }else{
-            Toast.makeText(MainActivityFragment.this.getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
-        }
-
+        URL movieSearchUrl = NetworkUtils.buildUrl(popular);
+        new MovieQueryTask().execute(movieSearchUrl);
     }
 
     public class MovieQueryTask extends AsyncTask<URL, Void, String> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,10 +78,12 @@ public class MainActivityFragment extends Fragment {
         protected String doInBackground(URL... params) {
             URL searchUrl = params[0];
             String movieSearchResults = null;
-            try {
-                movieSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (isOnline()){
+                try {
+                    movieSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return movieSearchResults;
         }
@@ -123,10 +119,8 @@ public class MainActivityFragment extends Fragment {
 
                     }
                 });
-
-//                Log.d("movies", String.valueOf(movies));
-            } else {
-//                showErrorMessage();
+            }else {
+                Toast.makeText(MainActivityFragment.this.getActivity(), R.string.no_internet_connection, Toast.LENGTH_SHORT).show();
             }
         }
     }

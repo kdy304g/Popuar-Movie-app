@@ -24,7 +24,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.movie_item, parent, false);
         }
         ImageView iconView = (ImageView) convertView.findViewById(R.id.movie_image);
-        Picasso.get().load("https://image.tmdb.org/t/p/w185/"+movie.getImage()).into(iconView);
+        Picasso.get().load("https://image.tmdb.org/t/p/w500/"+movie.getImage()).into(iconView);
 
         return convertView;
     }
