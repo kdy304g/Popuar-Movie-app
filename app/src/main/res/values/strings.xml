@@ -18,5 +18,4 @@
     <string name="detail_release_date">\"release date: \"</string>
     <string name="detail_average_vote">\"average vote: \"</string>
     <string name="detail_plot">\"plot synopsis: \"</string>
-    <string name="movie">movie</string>
 </resources>
