@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Popular Movie</string>
+    <string name="error_message">
+        Failed to get results. Please try again.
+    </string>
+    <string name="search">Search</string>
+    <string name="detail_error_message">error!</string>
+    <string name="popular">popular</string>
+    <string name="top">top_rated</string>
+    <string name="url_base_popular">https://api.themoviedb.org/3/movie/popular</string>
+    <string name="ping_internet">/system/bin/ping -c 1 8.8.8.8</string>
+    <string name="no_internet_connection">no internet</string>
+    <string name="movie">movie</string>
+    <string name="movie_results">results</string>
+    <string name="picasso_base_url">https://image.tmdb.org/t/p/w185/</string>
+    <string name="detail_id">\"id: \"</string>
+    <string name="detail_title">\"title: \"</string>
+    <string name="detail_release_date">\"release date: \"</string>
+    <string name="detail_average_vote">\"average vote: \"</string>
+    <string name="detail_plot">\"plot synopsis: \"</string>
+    <string name="movie">movie</string>
+</resources>
