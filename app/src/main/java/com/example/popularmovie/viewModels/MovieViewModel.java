@@ -24,7 +24,7 @@ public class MovieViewModel extends AndroidViewModel {
             return;
         }
         movieRepository = MovieRepository.getInstance();
-        movieLiveData = movieRepository.getMovies("bf381698ac8d003e88186517803ff04b");
+        movieLiveData = movieRepository.getMovies("api_key_here");
     }
 
     public LiveData<MovieResult> getMoviesLiveData() {
