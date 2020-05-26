@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.squareup.picasso.Picasso;
+import com.example.popularmovie.models.Movie;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -26,21 +26,21 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Movie movie = intent.getParcelableExtra(getString(R.string.movie));
 
-        Picasso.get().load(getString(R.string.picasso_base_url) + movie.getImage()).into(m_Poster);
-
-        int id = movie.getId();
-        m_Id.setText(getString(R.string.detail_id)+String.valueOf(id));
-
-        String title = movie.getTitle();
-        m_Title.setText(getString(R.string.detail_title)+title);
-
-        String date = movie.getDate();
-        m_Date.setText(getString(R.string.detail_release_date)+date);
-
-        int vote = movie.getVote();
-        m_Vote.setText(getString(R.string.detail_average_vote)+String.valueOf(vote));
-
-        String plot = movie.getPlot();
-        m_Plot.setText(getString(R.string.detail_plot)+plot);
+//        Picasso.get().load(getString(R.string.picasso_base_url) + movie.getImage()).into(m_Poster);
+//
+//        int id = movie.getId();
+//        m_Id.setText(getString(R.string.detail_id)+String.valueOf(id));
+//
+//        String title = movie.getTitle();
+//        m_Title.setText(getString(R.string.detail_title)+title);
+//
+//        String date = movie.getDate();
+//        m_Date.setText(getString(R.string.detail_release_date)+date);
+//
+//        int vote = movie.getVote();
+//        m_Vote.setText(getString(R.string.detail_average_vote)+String.valueOf(vote));
+//
+//        String plot = movie.getPlot();
+//        m_Plot.setText(getString(R.string.detail_plot)+plot);
     }
 }
