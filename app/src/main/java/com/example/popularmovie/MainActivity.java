@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,13 +36,17 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
     MovieViewModel movieViewModel;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    GridLayoutManager mGridLayoutManager;
+    public static int index = -1;
+    public static int top = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.rvMovies);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        mGridLayoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -52,6 +57,25 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
         }
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        index = mGridLayoutManager.findFirstVisibleItemPosition();
+        View v = mRecyclerView.getChildAt(0);
+        top = ( v == null ) ? 0 : (v.getTop() - mRecyclerView.getPaddingTop());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isNetworkConnected()){
+            populateUI();
+        }else{
+            Toast.makeText(getApplicationContext(),R.string.need_internet,Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     public void populateUI(){
         switch(pref.getString(getString(R.string.sort_by),"")){
@@ -81,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
                 mMovies.clear();
                 mMovies.addAll(movieResult.getMovieResult());
                 mMovieAdapter.notifyDataSetChanged();
+                if (index != -1){
+                    mGridLayoutManager.scrollToPositionWithOffset( index, top);
+                }
             }
         });
     }
@@ -96,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
                     mMovies.clear();
                     mMovies.addAll(movieResult.getMovieResult());
                     mMovieAdapter.notifyDataSetChanged();
+                    if (index != -1){
+                        mGridLayoutManager.scrollToPositionWithOffset( index, top);
+                    }
                 }
             });
     }
@@ -111,18 +141,11 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
                 mFavoriteMovies.clear();
                 mFavoriteMovies.addAll(favoriteMovies);
                 mFavoriteMovieAdapter.notifyDataSetChanged();
+                if (index != -1){
+                    mGridLayoutManager.scrollToPositionWithOffset( index, top);
+                }
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(isNetworkConnected()){
-            populateUI();
-        }else{
-            Toast.makeText(getApplicationContext(),R.string.need_internet,Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -133,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        top = -1;
+        index = -1;
         if(isNetworkConnected()){
             switch (item.getItemId()){
                 case R.id.action_favorite:
