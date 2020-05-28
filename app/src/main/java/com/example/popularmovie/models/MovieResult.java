@@ -4,18 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 public class MovieResult implements Serializable {
     @SerializedName("results")
     @Expose
-    private ArrayList<Movie> movieResult;
+    private List<Movie> movieResult;
 
-    public MovieResult(ArrayList<Movie> movieResult) {
+    public MovieResult(List<Movie> movieResult) {
         this.movieResult = movieResult;
     }
 
-    public ArrayList<Movie> getMovieResult() {
+    public List<Movie> getMovieResult() {
         return movieResult;
     }
 }

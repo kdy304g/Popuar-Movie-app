@@ -5,30 +5,30 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
+import com.example.popularmovie.models.FavoriteMovie;
 import com.example.popularmovie.models.MovieResult;
 import com.example.popularmovie.repositories.MovieRepository;
+import com.example.popularmovie.utilities.Constants;
+
+import java.util.List;
 
 public class MovieViewModel extends AndroidViewModel {
 
-    private MutableLiveData<MovieResult> movieLiveData;
     private MovieRepository movieRepository;
 
     public MovieViewModel(@NonNull Application application){
         super(application);
+        movieRepository = MovieRepository.getInstance(application);
     }
 
-    public void init(){
-        if (movieLiveData != null){
-            return;
-        }
-        movieRepository = MovieRepository.getInstance();
-        movieLiveData = movieRepository.getMovies("api_key_here");
+    public LiveData<MovieResult> getPopularMoviesLiveData() {
+        return movieRepository.getPopularMovies(Constants.api_key);
     }
-
-    public LiveData<MovieResult> getMoviesLiveData() {
-        init();
-        return movieLiveData;
+    public LiveData<MovieResult> getTopRatedMoviesLiveData(){
+        return movieRepository.getTopRatedMovies(Constants.api_key);
+    }
+    public LiveData<List<FavoriteMovie>> getFavoriteMoviesLiveData(){
+        return movieRepository.getFavoriteMovies();
     }
 }

@@ -18,4 +18,6 @@
     <string name="detail_release_date">\Release date: \</string>
     <string name="detail_average_vote">\Average vote: \</string>
     <string name="detail_plot">\Plot synopsis: \</string>
+    <string name="need_internet">You need access to internet</string>
+    <string name="sort_by">sort_by</string>
 </resources>

@@ -4,11 +4,13 @@
     <item
         android:id="@+id/action_popular"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom"
         android:title="@string/popular"/>
     <item
         android:id="@+id/action_top"
         android:orderInCategory="2"
-        app:showAsAction="ifRoom"
         android:title="@string/top"/>
+    <item
+        android:id="@+id/action_favorite"
+        android:orderInCategory="3"
+        android:title="favorite"/>
 </menu>
