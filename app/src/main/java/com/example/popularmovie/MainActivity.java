@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.rvMovies);
-        mGridLayoutManager = new GridLayoutManager(this, 2);
+        mGridLayoutManager = new GridLayoutManager(this, calculateNoOfColumns(this));
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         pref = getApplicationContext().getSharedPreferences("MyPref", 0);
@@ -76,6 +77,15 @@ public class MainActivity extends AppCompatActivity implements MovieRecyclerView
         }
     }
 
+    public static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 200;
+        int noOfColumns = (int) (dpWidth / scalingFactor);
+        if(noOfColumns < 2)
+            noOfColumns = 2;
+        return noOfColumns;
+    }
 
     public void populateUI(){
         switch(pref.getString(getString(R.string.sort_by),"")){

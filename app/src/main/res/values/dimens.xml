@@ -2,4 +2,13 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title">20dp</dimen>
+    <dimen name="poster_layout">200dp</dimen>
+    <dimen name="poster_height">300dp</dimen>
+    <dimen name="poster_detail_width">200dp</dimen>
+    <dimen name="movie_date_text">18dp</dimen>
+    <dimen name="movie_vote_text">18dp</dimen>
+    <dimen name="vote_margin_bottom">20dp</dimen>
+    <dimen name="favorite_text">18dp</dimen>
+    <dimen name="trailers_text">18dp</dimen>
 </resources>
